@@ -10,6 +10,10 @@ ENTRY = "Synchronised screaming: pairs are judged on pitch, duration, and how ma
 
 
 def main() -> None:
+    if not 1 <= len(ENTRY) <= 200:
+        raise ValueError("entry must be 1-200 characters, got %d" % len(ENTRY))
+    if "\n" in ENTRY or "\r" in ENTRY:
+        raise ValueError("entry must be a single line")
     out_dir = os.environ.get("OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
